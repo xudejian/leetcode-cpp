@@ -10,4 +10,5 @@ include_directories(include)
 
 add_subdirectory(src)
 add_subdirectory(tests)
+add_subdirectory(fuzz)
 add_subdirectory(lib/googletest)
