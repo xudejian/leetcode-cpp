@@ -1,5 +1,6 @@
 #include <setjmp.h>
 #include <signal.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 #include "gtest/gtest.h"
@@ -30,6 +31,9 @@ class MyTestListener : public ::testing::EmptyTestEventListener {
 
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
-  ::testing::UnitTest::GetInstance()->listeners().Append(new MyTestListener());
+  if (getenv("noTLE") == NULL) {
+    ::testing::UnitTest::GetInstance()->listeners().Append(
+        new MyTestListener());
+  }
   return RUN_ALL_TESTS();
 }
